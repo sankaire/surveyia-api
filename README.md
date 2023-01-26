@@ -60,5 +60,68 @@ https://surveyia-api.herokuapp.com/api
   "data": null
 }
 ```
-
+## Questionares
+- create questionare `create/questionare` http verb `POST`
+- Request Body
+```json
+{
+  "title":"First questionare",
+  "payout":"10",
+  "description":"This is the first questionare",
+  "questions":[
+    {
+     "type":"multiple choice",
+     "optional":false,
+     "question":"How are you today?",
+     "choices":["good", "ok", "bad"]
+    },
+        {
+     "type":"multiple choice",
+     "optional":false,
+     "question":"How are you today?",
+     "choices":["good", "ok", "bad"]
+    }
+  ]
+}
+```
+- Authorization `Bearer <token>`
+- Respone Body
+```json
+{
+  "success": true,
+  "message": "Question created",
+  "data": {
+    "user_id": "63d2497f17efc70d5c9693ff",
+    "title": "First questionare",
+    "payaout": "10",
+    "description": "This is the first questionare",
+    "questions": [
+      {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      },
+      {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      }
+    ],
+    "_id": "63d26859ff6fb892c6ee96f2",
+    "createdAt": "2023-01-26T11:47:37.786Z",
+    "updatedAt": "2023-01-26T11:47:37.786Z",
+    "__v": 0
+  }
+}
+```
 
