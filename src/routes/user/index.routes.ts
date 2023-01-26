@@ -11,7 +11,6 @@ router.post(
 );
 router.get(
   "/questionare/:questionare_id",
-  auth.ensure_is_authendicated,
   indexContoller.questionare.get_questionare
 );
 
