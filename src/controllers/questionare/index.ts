@@ -32,7 +32,7 @@ const create_new_questionare = async (
       throw Error("Phone number is undefined");
     }
     let payment = new TandaAPI();
-    await payment.initiatePayment(topup, "254794979175", true);
+    await payment.initiatePayment(topup, phone, true);
     return res.status(200).json({
       success: true,
       message: "Question created",
