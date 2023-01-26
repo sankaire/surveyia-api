@@ -8,7 +8,7 @@ https://surveyia-api.herokuapp.com/api
 ### Authentication
 - signup: `/auth/signup http verb `POST`
 - Requestbody
-`json
+```json
 {
   "email":"username@gmail.com",
   "name":"username",
@@ -17,7 +17,7 @@ https://surveyia-api.herokuapp.com/api
 }
 ```
 - success response 
-`json
+```json
 {
   "success": true,
   "message": "User created",
