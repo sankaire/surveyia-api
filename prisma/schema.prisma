@@ -15,6 +15,7 @@ model User {
   email         String         @unique
   name          String?
   phone         String?
+  password      String
   questionnaire Questionnaire?
   Topups        Topups?
 }

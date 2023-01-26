@@ -1,15 +1,19 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import User from "../interfaces";
+import UserModel from "../schemas/users";
 
 const create_user = async (
   name: string,
   email: string,
-  phone: string
-): Promise<object> => {
-  const new_user = await prisma.users.create({
-    data: { name: name, email: email, phone: phone },
+  phone: string,
+  password: string
+): Promise<User> => {
+  const new_user = new UserModel({
+    name: name,
+    email: email,
+    phone: phone,
+    password: password,
   });
+  await new_user.save();
   return new_user;
 };
 
