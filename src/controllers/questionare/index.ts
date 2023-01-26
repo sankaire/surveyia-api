@@ -80,6 +80,7 @@ const get_questionare_response = async (req: Request, res: Response) => {
         .json({ success: false, message: "Answer all questions", data: null });
     }
     await sendairtime.send_airtime(parseInt(payout), phone);
+    return res.status(200).json({ success: true, message: "airtime sent" });
   } catch (error: any) {
     return res
       .status(500)
