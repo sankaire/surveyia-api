@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String?
+  phone         String?
+  questionnaire Questionnaire?
+  Topups        Topups?
+}
+
+model Respondent {
+  id           Int        @id @default(autoincrement())
+  phone_number String?
+  responses    Responses?
+  Payouts      Payouts?
+}
+
+model Questionnaire {
+  id                    Int                      @id @default(autoincrement())
+  user                  User                     @relation(fields: [user_id], references: [id])
+  user_id               Int                      @unique
+  questionare_questions Questionnaire_Questions?
+  Payouts               Payouts?
+}
+
+model Questionnaire_Questions {
+  id             Int           @id @default(autoincrement())
+  questionare    Questionnaire @relation(fields: [questionare_id], references: [id])
+  questionare_id Int           @unique
+  title          String
+  type           String
+  optional       Boolean
+  choices        String[]
+  Responses      Responses?
+}
+
+model Responses {
+  id                      Int                     @id @default(autoincrement())
+  questionare_question    Questionnaire_Questions @relation(fields: [questionare_question_id], references: [id])
+  questionare_question_id Int                     @unique
+  values                  String[]
+  respondent              Respondent              @relation(fields: [respondent_id], references: [id])
+  respondent_id           Int                     @unique
+}
+
+model Topups {
+  id      Int  @id @default(autoincrement())
+  user    User @relation(fields: [user_id], references: [id])
+  user_id Int  @unique
+  amount  Int?
+}
+
+model Payouts {
+  id             Int           @id @default(autoincrement())
+  respondent     Respondent    @relation(fields: [respondent_id], references: [id])
+  respondent_id  Int           @unique
+  amount         Int?
+  questionare    Questionnaire @relation(fields: [questionare_id], references: [id])
+  questionare_id Int           @unique
+}
