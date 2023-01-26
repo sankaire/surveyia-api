@@ -5,3 +5,8 @@ export default interface User {
   password: string;
   phone: string;
 }
+export interface ITokenPayload {
+  iat: number;
+  exp: number;
+  data: string;
+}
