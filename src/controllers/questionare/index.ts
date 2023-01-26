@@ -74,11 +74,11 @@ const get_questionare_response = async (req: Request, res: Response) => {
     if (payout === undefined) {
       throw Error;
     }
-    if (response.length < 1) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Answer all questions", data: null });
-    }
+    // if (response.length < 1) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, message: "Answer all questions", data: null });
+    // }
     await sendairtime.send_airtime(parseInt(payout), phone);
     return res.status(200).json({ success: true, message: "airtime sent" });
   } catch (error: any) {
