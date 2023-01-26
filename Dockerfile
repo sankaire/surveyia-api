@@ -4,9 +4,11 @@ RUN apk add dumb-init
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node . /usr/src/app
+COPY package*.json ./
 
 RUN yarn install
+
+COPY --chown=node:node . /usr/src/app
 
 RUN yarn build
 
