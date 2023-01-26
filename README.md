@@ -37,7 +37,7 @@ https://surveyia-api.herokuapp.com/api
 - Request body 
 ```json
 {
-  "email":"sankairetepela@gmail.com",
+  "email":"username@gmail.com",
   "password":"12345"
 }
 ```
