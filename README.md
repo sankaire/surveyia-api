@@ -12,7 +12,7 @@ https://surveyia-api.herokuapp.com/api
 {
   "email":"username@gmail.com",
   "name":"username",
-  "phone":"+25412345678",
+  "phone":"25412345678",
   "password":"12345"
 }
 ```
@@ -23,9 +23,8 @@ https://surveyia-api.herokuapp.com/api
   "message": "User created",
   "data": {
     "name": "username",
-    "phone": "+25412345678",
+    "phone": "25412345678",
     "email": "username@gmail.com",
-    "password": "$2b$10$pecrSS1eZySSgpm4.4GcCu5vhVagNsUua0ZFaT0cAjfKPbi6Whn0C",
     "_id": "63d2497f17efc70d5c9693ff",
     "createdAt": "2023-01-26T09:35:59.584Z",
     "updatedAt": "2023-01-26T09:35:59.584Z",
@@ -61,7 +60,7 @@ https://surveyia-api.herokuapp.com/api
 }
 ```
 ## Questionares
-- create questionare `create/questionare` http verb `POST`
+- create questionare `user/create/questionare` http verb `POST`
 - Request Body
 ```json
 {
@@ -124,4 +123,83 @@ https://surveyia-api.herokuapp.com/api
   }
 }
 ```
+## Fetch Questionare
+- Request `user/questionare/:questionare_id` http verb `GET`
+- Response body
+```json
+{
+  "success": true,
+  "message": "Questions Fetched",
+  "data": {
+    "_id": "63d2830e584bc9f5f6788dba",
+    "user_id": "63d2497f17efc70d5c9693ff",
+    "title": "First questionare",
+    "payaout": "10",
+    "description": "This is the first questionare",
+    "questions": [
+      {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      },
+      {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      }
+    ],
+    "createdAt": "2023-01-26T13:41:34.763Z",
+    "updatedAt": "2023-01-26T13:41:34.763Z",
+    "__v": 0
+  }
+}
+```
+## Submit Questionare Responses `user/questionare/:questionare_id` http verb `POST`
+- Request Body
+```json
+{
+  "response":[
+          {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      },
+      {
+        "type": "multiple choice",
+        "optional": false,
+        "question": "How are you today?",
+        "choices": [
+          "good",
+          "ok",
+          "bad"
+        ]
+      }
+    ],
+    "phone":"+254790123456"
+}
+```
+- Response Body
+```json
+{
+  success:true,
+  message:"Airtime sent"
+}
+```
+  
+
 
