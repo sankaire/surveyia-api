@@ -16,4 +16,6 @@ app.use(cors());
 app.use("/api/auth", indexRoutes.user_router);
 app.use("/api/user", indexRoutes.admin_router);
 
+app.use("/", indexRoutes.docs_router);
+
 export default app;
