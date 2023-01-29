@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --files --poll src/index.ts",
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/src/index.js"
   },
   "engines": {
     "node": "18.x.x"
