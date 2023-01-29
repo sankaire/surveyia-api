@@ -1,0 +1,297 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Surveyia Api",
+        "description": "Get 10x feedback on your surveys",
+        "version": "1.0.0"
+    },
+    "host": "https://surveyia-api.herokuapp.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/api",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create an account",
+                "description": "Fill in your details to create an account with Surveyia",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "Your email address",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "Your name",
+                        "required": true
+                    },
+                    {
+                        "name": "phone",
+                        "in": "body",
+                        "description": "your Phone number",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Your password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sigup success response",
+                        "examples": {
+                            "application/json": {
+                                "success": true,
+                                "message": "User created",
+                                "data": {
+                                    "name": "username",
+                                    "phone": "25412345678",
+                                    "email": "username@gmail.com",
+                                    "_id": "63d2497f17efc70d5c9693ff",
+                                    "createdAt": "2023-01-26T09:35:59.584Z",
+                                    "updatedAt": "2023-01-26T09:35:59.584Z",
+                                    "__v": 0
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email Already Exists",
+                        "examples": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login to your account",
+                "description": "Fill in your details to Login to your Surveyia account",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "Your email address",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Your password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": {
+                                "success": true,
+                                "message": "Login successfull",
+                                "data": {
+                                    "user_id": "63d2497f17efc70d5c9693ff",
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjNkMjQ5N2YxN2VmYzcwZDVjOTY5M2ZmIiwiaWF0IjoxNjc0NzI2MDc4LCJleHAiOjE2NzQ3Mjk2Nzh9.8RR8A7CZ_OFi10PEakfXvw3fAcMideKQ-pNIIKTq2Bo"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "examples": {
+                            "application/json": {
+                                "success": true,
+                                "message": "Wrong password",
+                                "data": null
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/questionare": {
+            "post": {
+                "tags": [
+                    "questionare"
+                ],
+                "summary": "create a questionare",
+                "description": "Submit the required fields to create a questionare",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "questionare",
+                        "type": "object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Questionare"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/questionare/:questionare_id": {
+            "get": {
+                "tags": [
+                    "questionare"
+                ],
+                "summary": "Get questionare details",
+                "description": "Pass the questionare id to the params to get the questionare details",
+                "parameters": [
+                    {
+                        "name": "questionare_id",
+                        "in": "params",
+                        "description": "questionare id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "examples": {
+                            "application/json": {
+                                "success": true,
+                                "message": "Question created",
+                                "data": {
+                                    "user_id": "63d2497f17efc70d5c9693ff",
+                                    "title": "First questionare",
+                                    "payaout": "10",
+                                    "description": "This is the first questionare",
+                                    "questions": [
+                                        {
+                                            "type": "multiple choice",
+                                            "optional": false,
+                                            "question": "How are you today?",
+                                            "choices": [
+                                                "good",
+                                                "ok",
+                                                "bad"
+                                            ]
+                                        },
+                                        {
+                                            "type": "multiple choice",
+                                            "optional": false,
+                                            "question": "How are you today?",
+                                            "choices": [
+                                                "good",
+                                                "ok",
+                                                "bad"
+                                            ]
+                                        }
+                                    ],
+                                    "_id": "63d26859ff6fb892c6ee96f2",
+                                    "createdAt": "2023-01-26T11:47:37.786Z",
+                                    "updatedAt": "2023-01-26T11:47:37.786Z",
+                                    "__v": 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/questions/:questionare_id": {
+            "post": {
+                "tags": [
+                    "questionare"
+                ],
+                "summary": "Submist questionare response",
+                "description": "Submit responses and get rewarded with airtime",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "questionare",
+                        "type": "object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/QuestionareResponses"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Questionare": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "payout": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Question"
+                    }
+                }
+            }
+        },
+        "Question": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "optional": {
+                    "type": "boolean"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "choices": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "QuestionareResponses": {
+            "type": "object",
+            "properties": {
+                "phone": {
+                    "type": "string"
+                },
+                "answers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AnswersResponse"
+                    }
+                }
+            }
+        },
+        "AnswersResponse": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
